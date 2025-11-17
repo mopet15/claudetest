@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentenKoch - Einfache Rezepte für Studenten</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🍳 StudentenKoch</h1>
+            <p class="tagline">Einfache & günstige Rezepte für Studenten</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Filter-Sektion -->
+        <section class="filters">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Rezept suchen...">
+            </div>
+
+            <div class="filter-section">
+                <h3>Nach Zutaten filtern:</h3>
+                <div id="ingredientFilters" class="ingredient-tags"></div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Kategorien:</h3>
+                <div class="category-filters">
+                    <button class="filter-btn" data-category="all">Alle</button>
+                    <button class="filter-btn" data-category="vegetarisch">🥗 Vegetarisch</button>
+                    <button class="filter-btn" data-category="vegan">🌱 Vegan</button>
+                    <button class="filter-btn" data-category="schnell">⚡ Schnell (&lt;20 Min)</button>
+                    <button class="filter-btn" data-category="günstig">💰 Günstig (&lt;5€)</button>
+                    <button class="filter-btn" data-category="protein">💪 Proteinreich</button>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Kochzeit:</h3>
+                <div class="time-filters">
+                    <button class="filter-btn" data-time="all">Alle</button>
+                    <button class="filter-btn" data-time="0-15">0-15 Min</button>
+                    <button class="filter-btn" data-time="15-30">15-30 Min</button>
+                    <button class="filter-btn" data-time="30-60">30-60 Min</button>
+                </div>
+            </div>
+
+            <button id="resetFilters" class="reset-btn">Filter zurücksetzen</button>
+        </section>
+
+        <!-- Statistik -->
+        <div class="stats">
+            <span id="recipeCount">0 Rezepte gefunden</span>
+        </div>
+
+        <!-- Rezept-Grid -->
+        <section id="recipeGrid" class="recipe-grid">
+            <!-- Rezepte werden hier dynamisch eingefügt -->
+        </section>
+    </main>
+
+    <!-- Modal für Rezept-Details -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 StudentenKoch - Gesund & günstig kochen leicht gemacht!</p>
+        </div>
+    </footer>
+
+    <script src="recipes.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
