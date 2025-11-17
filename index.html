@@ -2,79 +2,135 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudentenKoch - Einfache Rezepte für Studenten</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>StudentenKoch</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>🍳 StudentenKoch</h1>
-            <p class="tagline">Einfache & günstige Rezepte für Studenten</p>
+    <!-- iOS-Style Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <h1 class="nav-title">Rezepte</h1>
+            <div class="nav-subtitle">110 studentenfreundliche Gerichte</div>
         </div>
-    </header>
+    </nav>
 
-    <main class="container">
-        <!-- Filter-Sektion -->
-        <section class="filters">
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Rezept suchen...">
-            </div>
-
-            <div class="filter-section">
-                <h3>Nach Zutaten filtern:</h3>
-                <div id="ingredientFilters" class="ingredient-tags"></div>
-            </div>
-
-            <div class="filter-section">
-                <h3>Kategorien:</h3>
-                <div class="category-filters">
-                    <button class="filter-btn" data-category="all">Alle</button>
-                    <button class="filter-btn" data-category="vegetarisch">🥗 Vegetarisch</button>
-                    <button class="filter-btn" data-category="vegan">🌱 Vegan</button>
-                    <button class="filter-btn" data-category="schnell">⚡ Schnell (&lt;20 Min)</button>
-                    <button class="filter-btn" data-category="günstig">💰 Günstig (&lt;5€)</button>
-                    <button class="filter-btn" data-category="protein">💪 Proteinreich</button>
-                </div>
-            </div>
-
-            <div class="filter-section">
-                <h3>Kochzeit:</h3>
-                <div class="time-filters">
-                    <button class="filter-btn" data-time="all">Alle</button>
-                    <button class="filter-btn" data-time="0-15">0-15 Min</button>
-                    <button class="filter-btn" data-time="15-30">15-30 Min</button>
-                    <button class="filter-btn" data-time="30-60">30-60 Min</button>
-                </div>
-            </div>
-
-            <button id="resetFilters" class="reset-btn">Filter zurücksetzen</button>
-        </section>
-
-        <!-- Statistik -->
-        <div class="stats">
-            <span id="recipeCount">0 Rezepte gefunden</span>
-        </div>
-
-        <!-- Rezept-Grid -->
-        <section id="recipeGrid" class="recipe-grid">
-            <!-- Rezepte werden hier dynamisch eingefügt -->
-        </section>
-    </main>
-
-    <!-- Modal für Rezept-Details -->
-    <div id="recipeModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div id="modalBody"></div>
+    <!-- Search Bar (iOS Style) -->
+    <div class="search-container">
+        <div class="search-bar">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM19 19l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <input type="text" id="searchInput" placeholder="Suche nach Rezepten oder Zutaten">
+            <button class="clear-btn" id="clearSearch" style="display: none;">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                </svg>
+            </button>
         </div>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 StudentenKoch - Gesund & günstig kochen leicht gemacht!</p>
+    <main class="main-content">
+        <!-- Filter Pills -->
+        <div class="filter-pills-container">
+            <div class="filter-pills" id="filterPills">
+                <button class="pill active" data-category="all">
+                    <span>Alle</span>
+                </button>
+                <button class="pill" data-category="vegetarisch">
+                    <span class="pill-emoji">🥗</span>
+                    <span>Vegetarisch</span>
+                </button>
+                <button class="pill" data-category="vegan">
+                    <span class="pill-emoji">🌱</span>
+                    <span>Vegan</span>
+                </button>
+                <button class="pill" data-category="schnell">
+                    <span class="pill-emoji">⚡</span>
+                    <span>Schnell</span>
+                </button>
+                <button class="pill" data-category="günstig">
+                    <span class="pill-emoji">💰</span>
+                    <span>Günstig</span>
+                </button>
+                <button class="pill" data-category="protein">
+                    <span class="pill-emoji">💪</span>
+                    <span>Protein</span>
+                </button>
+            </div>
         </div>
-    </footer>
+
+        <!-- Recipe Count -->
+        <div class="section-header">
+            <h2 id="recipeCount">110 Rezepte</h2>
+        </div>
+
+        <!-- Recipe Grid -->
+        <div class="recipe-grid" id="recipeGrid">
+            <!-- Recipes will be inserted here -->
+        </div>
+    </main>
+
+    <!-- Filter Button (Floating) -->
+    <button class="filter-fab" id="filterBtn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="4" y1="6" x2="20" y2="6"/>
+            <line x1="4" y1="12" x2="20" y2="12"/>
+            <line x1="4" y1="18" x2="20" y2="18"/>
+            <circle cx="7" cy="6" r="2" fill="white"/>
+            <circle cx="17" cy="12" r="2" fill="white"/>
+            <circle cx="12" cy="18" r="2" fill="white"/>
+        </svg>
+    </button>
+
+    <!-- Bottom Sheet for Recipe Details -->
+    <div class="bottom-sheet" id="recipeModal">
+        <div class="sheet-backdrop"></div>
+        <div class="sheet-content">
+            <div class="sheet-handle"></div>
+            <div class="sheet-body" id="modalBody">
+                <!-- Recipe details will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Sheet for Filters -->
+    <div class="bottom-sheet" id="filterModal">
+        <div class="sheet-backdrop"></div>
+        <div class="sheet-content">
+            <div class="sheet-handle"></div>
+            <div class="sheet-body">
+                <div class="sheet-header">
+                    <h2>Filter</h2>
+                    <button class="btn-text" id="resetFilters">Zurücksetzen</button>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Kochzeit</h3>
+                    <div class="filter-options">
+                        <button class="filter-option active" data-time="all">Alle</button>
+                        <button class="filter-option" data-time="0-15">0-15 Min</button>
+                        <button class="filter-option" data-time="15-30">15-30 Min</button>
+                        <button class="filter-option" data-time="30-60">30-60 Min</button>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Zutaten</h3>
+                    <div class="ingredient-search">
+                        <input type="text" id="ingredientSearch" placeholder="Zutat suchen...">
+                    </div>
+                    <div class="ingredient-tags" id="ingredientFilters">
+                        <!-- Ingredients will be inserted here -->
+                    </div>
+                </div>
+
+                <button class="apply-btn" id="applyFilters">Anwenden</button>
+            </div>
+        </div>
+    </div>
 
     <script src="recipes.js"></script>
     <script src="app.js"></script>
